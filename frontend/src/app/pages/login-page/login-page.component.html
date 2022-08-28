@@ -1,0 +1,21 @@
+<div class="centered-content">
+  <form class="modal-box" [formGroup]="newLoginForm">
+    <h1>Sign in</h1>
+    <div class="create-box">
+      <p>
+        <span style="color:  #DF5757"
+              *ngIf="!newLoginForm.get('email').valid">*The entered email is not a valid</span><br>
+        <input class="input" type="text" placeholder="Email" formControlName="email" required>
+      </p>
+      <p>
+        <span style="color:  #DF5757"
+              *ngIf="!newLoginForm.get('password').valid">*Password must have at least 8 symbols</span><br>
+        <input class="input" type="password" placeholder="type here password" formControlName="password" required>
+      </p>
+      <div class="sign-block">
+        <button [disabled]="newLoginForm.invalid" (click)="onSubmit()">Sign in</button>
+        <a routerLink="/registration">Create new account</a></div>
+    </div>
+  </form>
+</div>
+

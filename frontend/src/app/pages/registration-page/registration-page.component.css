@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+.centered-content {
+  font-family: 'Oswald', sans-serif;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #FBFAF5;
+}
+
+h1 {
+  text-align: left;
+  font-family: 'Oswald', sans-serif;
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #323231;
+}
+
+.create-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+input {
+  font-family: 'Oswald', sans-serif;
+  width:300px;
+  height: 40px;
+  border: 1px solid #323231;
+  border-radius: 6px;
+  font-size: 18px;
+  padding-left: 10px;
+  background-color: #FBFAF5
+}
+
+button {
+  font-family: 'Oswald', sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #FBFAF5;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-top: 20px;
+  background-color: #323231;
+  text-transform: uppercase;
+}
+
+a {
+  color: #323231;
+  margin-top: 15px;
+}
+
+.sign-block {
+  display: flex;
+
+  flex-direction: column;
+}
+
+button:hover {
+  border: solid 3px #323231;
+  color: #323231;
+  background-color: #FBFAF5;
+}

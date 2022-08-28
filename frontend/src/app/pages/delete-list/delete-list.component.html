@@ -1,0 +1,13 @@
+<div class="centered-content">
+  <div class="modal-box">
+    <h1>Delete password</h1>
+    <div class="create-box">
+      <p>Title: &nbsp;{{this.list.title}}</p>
+      <p>Account login: &nbsp;{{this.list.titleAccount}}</p>
+      <p>Password: &nbsp;{{this.list.password}}</p>
+      <div class="buttons-block">
+        <button  routerLink="/">Cancel</button>
+        <button (click)="deleteList(this.list._id)" >Delete</button></div>
+    </div>
+  </div>
+</div>

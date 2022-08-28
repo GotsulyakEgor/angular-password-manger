@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
+
+.centered-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5%;
+
+}
+
+.passwords-list-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #323231;
+}
+
+.title-board {
+  min-width: 700px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+
+}
+
+.button-header {
+  margin-bottom: 10px;
+}
+
+.buttons-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+}
+
+.list-menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  flex-grow: 1;
+
+}
+
+.list-menu-item {
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  /*padding: 10px 15px;*/
+  /*border-radius: 5px;*/
+  width: 100%;
+  color: #1c1b1b;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+
+.password-list-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.password-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  width: 130px;
+  margin-right: 20px;
+}
+
+
+button {
+  font-family: 'Oswald', sans-serif;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  height: 40px;
+  font-weight: bold;
+  border: solid 3px transparent;
+  border-radius: 6px;
+  margin-right: 15px;
+  color: #FBFAF5;
+  background-color: #323231;
+}
+
+button:hover {
+  border: solid 3px #323231;
+  color: #323231;
+  background-color: #FBFAF5;
+}
+
+
+.password-list-element-first-column {
+  display: flex;
+
+  justify-content: flex-start;
+}
+
+.password-list-element-second-column {
+  display: flex;
+  justify-content: flex-end;
+}

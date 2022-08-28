@@ -1,0 +1,26 @@
+<div class="centered-content">
+  <form class="modal-box" [formGroup]="newRegisterForm">
+    <h1>Sign up</h1>
+    <div class="create-box">
+      <p>
+        <label style="color: #DF5757" *ngIf="!newRegisterForm.get('name').valid" for="userName">*The name shouldn't be
+          empty</label><br>
+        <input id="userName" class="input" type="text" placeholder="Name" formControlName="name" required>
+      </p>
+      <p>
+        <label style="color: #DF5757" *ngIf="!newRegisterForm.get('email').valid" for="email">*The entered email is not
+          a valid</label><br>
+        <input id="email" class="input" type="text" placeholder="Email" formControlName="email" required>
+      </p>
+      <p>
+        <label style="color: #DF5757" *ngIf="!newRegisterForm.get('password').valid" for="password">*Password must have
+          at least 8 symbols</label><br>
+        <input id="password" class="input" type="password" placeholder="Password" formControlName="password" required>
+      </p>
+      <div class="sign-block">
+
+        <button routerLink="/login" [disabled]="newRegisterForm.invalid" (click)="onSubmit() ">Sign up</button>
+        <a routerLink="/login">Do you already have an account?</a></div>
+    </div>
+  </form>
+</div>

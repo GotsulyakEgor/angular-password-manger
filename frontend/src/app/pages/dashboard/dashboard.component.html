@@ -1,0 +1,36 @@
+<div class="centered-content">
+  <div class="passwords-list-container ">
+    <div class="title-board">
+      <div>
+        <h1 class="title ">
+          Hi {{userName}} </h1>
+          <h1 class="title" *ngIf="lists.length > 0"> your Passwords: </h1>
+        <h1 class="title" *ngIf="lists.length == 0"> Add your first Password: </h1>
+      </div>
+      <div class="buttons-block">
+        <button class="button-header" (click)="logout()">LOGOUT</button>
+        <button routerLink="/new-list">ADD PASSWORD</button>
+      </div>
+    </div>
+    <div class="password-list-element" *ngFor="let list of lists">
+      <div class="password-list-element-first-column">
+        <p class="password-title">{{list.title}}</p>
+        <p class="password-title">{{list.titleAccount}}</p>
+        <p *ngIf="!list.togglePassword" class="password-title">*********</p>
+        <p *ngIf="list.togglePassword" class="password-title">{{ this.list.password}}</p>
+        <!--          <input type="text" *ngIf="list.togglePassword"  value=" {{ this.list.password}}">-->
+      </div>
+      <div class="password-list-element-second-column">
+        <button *ngIf="!list.togglePassword" class="reveal-button" (click)="list.togglePassword=!list.togglePassword">
+          REVEAL
+        </button>
+        <button *ngIf="list.togglePassword" class="reveal-button" (click)="list.togglePassword=!list.togglePassword">
+          HIDE
+        </button>
+        <button class="edit-button" (click)="editList(list._id)">EDIT</button>
+        <button class="delete-button" (click)="deleteList(list._id)">DELETE</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<!--<div class="centered-content">-->
+<!--<form class="modal-box" [formGroup]="newListForm" (ngSubmit)="onSubmit()">-->
+<!--<h1>Create a new list</h1>-->
+<!--  <div class="create-box">-->
+<!--    <span style="color: #DF5757" *ngIf="!newListForm.get('title').valid">*The title shouldn't be empty</span><br>-->
+<!--    <p>-->
+<!--      <input  class="input" type="text" placeholder="Title" formControlName="title">-->
+<!--    </p>-->
+<!--    <p>-->
+<!--      <input  class="input" type="text" placeholder="Account login (optional)" formControlName="titleAccount">-->
+<!--    </p>-->
+<!--    <span style="color: #DF5757" *ngIf="!newListForm.get('password').valid">*The title shouldn't be empty</span><br>-->
+<!--    <p>-->
+<!--      <input  class="input" type="text" placeholder="Password" formControlName="password">-->
+<!--    </p>-->
+<!--    <div>-->
+<!--    <button  routerLink="/">Cancel</button>-->
+<!--      <input type="submit" value="Create">-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</form>-->
+<!--</div>-->
+
+<div class="centered-content">
+  <form class="modal-box" [formGroup]="newListForm" (ngSubmit)="onSubmit()">
+    <h1>Create a new list</h1>
+    <div class="create-box">
+      <p>
+        <label style="color: #DF5757" *ngIf="!newListForm.get('title').valid" for="userName">*The title shouldn't be
+          empty</label><br>
+        <input id="userName" class="input" type="text" placeholder="Title" formControlName="title" required  >
+      </p>
+      <p>
+        <label style="visibility: hidden" for="userName">*The title shouldn't be
+          empty</label><br>
+        <input  class="input" type="text" placeholder="Account login (optional)" formControlName="titleAccount" >
+      </p>
+      <p>
+        <label style="color: #DF5757" *ngIf="!newListForm.get('password').valid" for="password">*The password shouldn't be
+          empty</label><br>
+        <input id="password" class="input" type="password" placeholder="Password" formControlName="password" required >
+      </p>
+      <div class="sign-block">
+        <button routerLink="/" >Cancel</button>
+        <input type="submit" [disabled]="newListForm.invalid" class="input-btn" value="Create">
+      </div>
+    </div>
+  </form>
+</div>
