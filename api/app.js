@@ -6,7 +6,8 @@ const {mongoose} = require('./db/mongooose')
 const bodyParser = require('body-parser')
 const {List, Password, User} = require('./db/models/index');
 const jwt = require('jsonwebtoken');
-
+const CryptoJS = require('crypto-js');
+const key = 'your-secret-key';
 
 app.use(bodyParser.json());
 
@@ -75,59 +76,112 @@ let verifySession = (req, res, next) => {
 }
 
 
-app.get('/all-passwords', authenticate,  (req, res) => {
+app.get('/all-passwords', authenticate, (req, res) => {
     List.find({
         _userId: req.user_id
     }).then((lists) => {
-        res.send(lists)
-    }).catch((e) => {
-        res.send(e);
-    })
-})
+        const key = 'your-secret-key'; // replace with your own secret key
 
-app.post('/create-password', authenticate,(req, res) => {
-    let title = req.body.title
-    let titleAccount = req.body.titleAccount
-    let password = req.body.password
-    let _userId = req.body._userId
-    let togglePassword = req.body.togglePassword
+        // Decrypt password for each list item using AES algorithm
+        const decryptedLists = lists.map(list => {
+            const ciphertextPassword = list.password;
+            const bytes = CryptoJS.AES.decrypt(ciphertextPassword, key);
+            list.password = bytes.toString(CryptoJS.enc.Utf8);;
+            return list;
+        });
+
+        res.send(decryptedLists);
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).send('An error occurred while retrieving the passwords.');
+    });
+});
+
+app.post('/create-password', authenticate, (req, res) => {
+    let title = req.body.title;
+    let titleAccount = req.body.titleAccount;
+    let plaintextPassword = req.body.password;
+    let togglePassword = req.body.togglePassword;
+
+    // Encrypt password using AES algorithm
+    const key = 'your-secret-key'; // replace with your own secret key
+    const ciphertextPassword = CryptoJS.AES.encrypt(plaintextPassword, key).toString();
+
     let newList = new List({
         title,
         titleAccount,
-        password,
+        password: ciphertextPassword, // save encrypted password to database
         _userId: req.user_id,
         togglePassword
     });
+
     newList.save().then((listDoc) => {
-        res.send(listDoc)
-    })
-})
+        res.send(listDoc);
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).send('An error occurred while saving the password.');
+    });
+});
 
 app.patch('/edit-password/:id', authenticate, (req, res) => {
-    List.findOneAndUpdate({_id: req.params.id, _userId: req.user_id},{
-        $set: req.body
+    const key = 'your-secret-key'; // replace with your own secret key
+
+    // Encrypt password using AES algorithm
+    const plaintextPassword = req.body.password;
+    const ciphertextPassword = CryptoJS.AES.encrypt(plaintextPassword, key).toString();
+
+    List.findOneAndUpdate({_id: req.params.id, _userId: req.user_id}, {
+        $set: {
+            title: req.body.title,
+            titleAccount: req.body.titleAccount,
+            password: ciphertextPassword, // save encrypted password
+            togglePassword: req.body.togglePassword
+        }
     }).then(() => {
-        res.sendStatus(200)
+        res.sendStatus(200);
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).send('An error occurred while updating the password.');
     });
 });
 
 app.delete('/delete-password/:id', authenticate, (req, res) => {
-    List.findOneAndDelete({
-        _id: req.params.id,
-        _userId: req.user_id
-    }).then((removedListDoc) => {
-        res.send(removedListDoc)
+    const key = 'your-secret-key'; // replace with your own secret key
+
+    List.findOneAndDelete({_id: req.params.id, _userId: req.user_id}).then((removedListDoc) => {
+        // Decrypt password using AES algorithm
+        const ciphertextPassword = removedListDoc.password;
+        const bytes = CryptoJS.AES.decrypt(ciphertextPassword, key);
+        const plaintextPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+        // Update removedListDoc object with decrypted password
+        const removedListDocWithDecryptedPassword = Object.assign({}, removedListDoc.toObject(), {password: plaintextPassword});
+
+        res.send(removedListDocWithDecryptedPassword);
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).send('An error occurred while deleting the password.');
     });
-})
+});
 
 app.get('/find-password/:id', (req, res) => {
-    List.findOne({
-        _id: req.params.id
+    const key = 'your-secret-key'; // replace with your own secret key
 
-    }).then((task) => {
-        res.send(task)
-    })
-})
+    List.findOne({_id: req.params.id}).then((task) => {
+        // Decrypt password using AES algorithm
+        const ciphertextPassword = task.password;
+        const bytes = CryptoJS.AES.decrypt(ciphertextPassword, key);
+        const plaintextPassword = bytes.toString(CryptoJS.enc.Utf8);
+
+        // Update task object with decrypted password
+        const taskWithDecryptedPassword = Object.assign({}, task.toObject(), {password: plaintextPassword});
+
+        res.send(taskWithDecryptedPassword);
+    }).catch((error) => {
+        console.error(error);
+        res.status(500).send('An error occurred while finding the password.');
+    });
+});
 
 app.post('/user/create', (req, res) => {
     let body = req.body;
@@ -178,7 +232,6 @@ app.get('/users/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     })
 })
-
 
 
 app.listen(3000, () => {
