@@ -86,7 +86,7 @@ app.get('/all-passwords', authenticate, (req, res) => {
         const decryptedLists = lists.map(list => {
             const ciphertextPassword = list.password;
             const bytes = CryptoJS.AES.decrypt(ciphertextPassword, key);
-            list.password = bytes.toString(CryptoJS.enc.Utf8);;
+            list.password = bytes.toString(CryptoJS.enc.Utf8);
             return list;
         });
 

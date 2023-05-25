@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../angular-courses-app/my-app/.idea/my-app.iml" filepath="$PROJECT_DIR$/../angular-courses-app/my-app/.idea/my-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/password-manager.iml" filepath="$PROJECT_DIR$/.idea/password-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WebstormProjects/techTalents/.idea/techTalents.iml" filepath="$PROJECT_DIR$/../WebstormProjects/techTalents/.idea/techTalents.iml" />
     </modules>
   </component>
 </project>

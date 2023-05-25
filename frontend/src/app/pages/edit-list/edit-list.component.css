@@ -12,6 +12,11 @@
 
 h1 {
   text-align: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 36px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #323231;
 }
 
 .create-box {
